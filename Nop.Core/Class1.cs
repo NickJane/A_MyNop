@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nop.Data
+namespace Nop.Core
 {
     public class Class1
     {

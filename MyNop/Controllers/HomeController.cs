@@ -16,6 +16,14 @@ namespace MyNop.Controllers
             NopObjectContext a = new NopObjectContext();
             var name = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().UserName;
             name = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().Auth_Roles.FirstOrDefault().RoleName;
+
+            var userext = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().UserExt;
+
+            var address = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().UserAddresses;
+
+            var resources = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().Auth_Roles
+                .First().Auth_Resources;
+
             return Content("");
         }
 	}

@@ -14,5 +14,7 @@ namespace Nop.Core.Domain
         public string RoleName { get; set; }
 
         public virtual ICollection<UserAccount> UserAcconts { get; set; }
+
+        public virtual ICollection<Auth_Resource> Auth_Resources { get; set; }
     }
 }

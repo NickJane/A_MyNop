@@ -48,8 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\Users\Auth_ResourceMap.cs" />
     <Compile Include="Mapping\Users\Auth_RoleMap.cs" />
     <Compile Include="Mapping\Users\UserAccountMap.cs" />
+    <Compile Include="Mapping\Users\UserAddressMap.cs" />
+    <Compile Include="Mapping\Users\UserExtMap.cs" />
     <Compile Include="NopObjectContext.cs" />
     <Compile Include="IDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

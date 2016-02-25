@@ -15,6 +15,15 @@ namespace Nop.Data.Mapping.Users
             this.HasKey<int>(x => x.ID);
             this.Property(x => x.IsDelete);
             this.Property(x => x.IsSuperRole);
+
+            this.HasMany<Nop.Core.Domain.Auth_Resource>(x => x.Auth_Resources)
+                .WithMany(x => x.Auth_Roles)
+                .Map(r =>
+                {
+                    r.ToTable("Auth_Role_Resource");
+                    r.MapLeftKey("RoleID");
+                    r.MapRightKey("ResourceID");
+                });
         }
     }
 }

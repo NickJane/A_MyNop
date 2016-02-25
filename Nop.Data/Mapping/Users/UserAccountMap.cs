@@ -34,6 +34,7 @@ namespace Nop.Data.Mapping.Users
                     r.MapRightKey("RoleID");
                 });
 
+
         }
 
 

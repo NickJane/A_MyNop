@@ -20,6 +20,11 @@ namespace Nop.Core.Domain
         public bool IsDelete { get; set; }
         public virtual byte[] Settings { get; set; }
 
+        
         public virtual ICollection<Auth_Role> Auth_Roles { get; set; }
+
+        public virtual UserExt UserExt { get; set; }
+
+        public virtual ICollection<UserAddress> UserAddresses { get; set; }
     }
 }

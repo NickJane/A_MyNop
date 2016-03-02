@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nop.Services
+namespace Nop.Services.Users
 {
-    public class Class1
+    public interface IUserService: IBaseService<Nop.Core.Domain.UserAccount,int>
     {
+
     }
 }

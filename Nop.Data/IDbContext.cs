@@ -11,13 +11,16 @@ using System.Threading.Tasks;
 namespace Nop.Data
 {
     /// <summary>
-    /// 提供对象列表的一切操作接口
+    /// 提供对象列表的一切操作接口, 最重要的三个,Database,IDbSet
     /// </summary>
     public interface IDbContext : IDisposable
     {
+        /// <summary>
+        /// 当前数据库实例
+        /// </summary>
         Database Database { get; }
         /// <summary>
-        /// Get DbSet
+        /// 表的DBSet
         /// </summary>
         /// <typeparam name="TEntity">Entity type</typeparam>
         /// <returns>DbSet</returns>
@@ -29,6 +32,7 @@ namespace Nop.Data
         /// <returns></returns>
         int SaveChanges();
 
+        #region
         /// <summary>
         /// Execute stores procedure and load a list of entities at the end
         /// </summary>
@@ -70,5 +74,6 @@ namespace Nop.Data
         void ExecuteStoredProcedure(string commandText, params object[] parameters);
 
         IList<ResultEntity> ExecuteStoredProcedure<ResultEntity>(Func<DbDataReader, ResultEntity> objConvert, string commandText, params object[] parameters) where ResultEntity : class;
+        #endregion
     }
 }

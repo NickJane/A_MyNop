@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EfRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Mapping\Users\Auth_ResourceMap.cs" />
     <Compile Include="Mapping\Users\Auth_RoleMap.cs" />
     <Compile Include="Mapping\Users\UserAccountMap.cs" />

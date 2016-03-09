@@ -34,8 +34,8 @@ namespace Nop.Data
         /// <param name="context">Object context IDbContext context</param>
         public EfRepository()
         {
-            this._context = new NopObjectContext();
-            //this._context = UnitOfWorkFactory.CurrentUnitOfWork.Context;
+            //this._context = new NopObjectContext();
+            this._context = UnitOfWorkFactory.CurrentUnitOfWork.Context;
         }
         public IDbContext Context
         {

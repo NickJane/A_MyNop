@@ -41,16 +41,23 @@ namespace MyNop.Framework.Infrastructure
                 .As<HttpSessionStateBase>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<Nop.Services.Users.UserService>()
-                .As<Nop.Services.Users.IUserService>().InstancePerLifetimeScope();
+            //每次依赖都使用一个新的数据库对象
+            builder.Register<IDbContext>(c => new NopObjectContext()).InstancePerDependency();
+            //注册工作单元
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+
+            //注册泛型仓储
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
 
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces();
+            
+
+            //注册服务
+            builder.RegisterType<Nop.Services.Users.UserService>() .As<Nop.Services.Users.IUserService>().InstancePerLifetimeScope();
+
 
             //controllers
             builder.RegisterControllers(typeFinder.GetAssemblies().ToArray());
-
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces();
         }
 
 

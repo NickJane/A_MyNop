@@ -17,10 +17,6 @@ namespace Nop.Services
         public BaseService()
         {
             _repository = Nop.Core.Infrastructure.MyEngineContext.Current.Resolve<IRepository<TEntity>>();
-            //_repository = new Nop.Data.EfRepository<TEntity>(new Nop.Data.NopObjectContext());
-            //_repository = new Nop.Data.EfRepository<TEntity>(new Nop.Data.NopObjectContext());
-
-            //_repository = EngineContext.Current.Resolve<IRepository<TEntity>>();
         }
 
         public virtual void Insert(TEntity entity)

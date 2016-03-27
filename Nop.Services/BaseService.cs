@@ -19,16 +19,16 @@ namespace Nop.Services
             _repository = Nop.Core.Infrastructure.MyEngineContext.Current.Resolve<IRepository<TEntity>>();
         }
 
-        public virtual void Insert(TEntity entity)
+        public virtual void Insert(TEntity entity, bool isSubmit = true)
         {
             _repository.Insert(entity);
         }
-        public virtual void Update(TEntity entity)
+        public virtual void Update(TEntity entity, bool isSubmit = true)
         {
             _repository.Update(entity);
         }
 
-        public virtual void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity, bool isSubmit = true)
         {
             _repository.Delete(entity);
         }

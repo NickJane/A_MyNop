@@ -44,7 +44,7 @@ namespace MyNop.Framework.Infrastructure
             //每次依赖都使用一个新的数据库对象
             builder.Register<IDbContext>(c => new NopObjectContext()).InstancePerDependency();
             //注册工作单元
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerDependency();
 
             //注册泛型仓储
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();

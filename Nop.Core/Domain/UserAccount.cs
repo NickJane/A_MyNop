@@ -14,8 +14,8 @@ namespace Nop.Core.Domain
         public int SiteID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime LastLoginTime { get; set; }
+        public DateTime? CreateTime { get; set; }
+        public DateTime? LastLoginTime { get; set; }
         public bool Active { get; set; }
         public bool IsDelete { get; set; }
         public virtual byte[] Settings { get; set; }

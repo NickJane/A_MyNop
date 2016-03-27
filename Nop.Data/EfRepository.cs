@@ -48,11 +48,11 @@ namespace Nop.Data
             string typeName = this.Entities.ElementType.Name;
             return this.Entities.Find(id);
         }
-        public void Insert(T entity)
-        {
-            Insert(entity, true);
-        }
-        public void Insert(T entity, bool isSubmit)
+        //public void Insert(T entity)
+        //{
+        //    Insert(entity, true);
+        //}
+        public void Insert(T entity, bool isSubmit = true)
         {
             try
             {
@@ -77,11 +77,11 @@ namespace Nop.Data
                 throw fail;
             }
         }
-        public void Update(T entity)
-        {
-            Update(entity, true);
-        }
-        public void Update(T entity, bool isSubmit)
+        //public void Update(T entity)
+        //{
+        //    Update(entity, true);
+        //}
+        public void Update(T entity, bool isSubmit = true)
         {
             try
             {
@@ -105,11 +105,11 @@ namespace Nop.Data
                 throw fail;
             }
         }
-        public void Delete(T entity)
-        {
-            Delete(entity, true);
-        }
-        public void Delete(T entity, bool isSubmit)
+        //public void Delete(T entity)
+        //{
+        //    Delete(entity, true);
+        //}
+        public void Delete(T entity, bool isSubmit = true)
         {
             try
             {

@@ -8,6 +8,7 @@ using Nop.Core;
 using Nop.Core.Data;
 using Nop.Core.Domain;
 using Nop.Services.Users;
+using Nop.Data;
 
 namespace MyNop.Controllers
 {
@@ -40,7 +41,55 @@ namespace MyNop.Controllers
             var resources = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().Auth_Roles
                 .First().Auth_Resources;
             */
+            return Content(temp.UserName);
+        }
+
+        public ActionResult UseUnitOfWork() {
+            //UnitOfWorkFactory.CurrentUnitOfWork.BeginTransaction();
+            //NopObjectContext db = UnitOfWorkFactory.CurrentUnitOfWork.Context as NopObjectContext;
+            //try {
+            //    db.ExecuteSqlCommand("insert into auth_role select 1,0,1,'222'");
+
+            //    db.SaveChanges();
+            //    throw new Exception();
+            //}
+            //catch {
+            //    UnitOfWorkFactory.CurrentUnitOfWork.RollBack();
+            //}
+
+
+            UnitOfWorkFactory.CurrentUnitOfWork.BeginTransaction();
+            //NopObjectContext db = UnitOfWorkFactory.CurrentUnitOfWork.Context as NopObjectContext;
+            try
+            {
+                var cus = new UserAccount
+                {
+                    UserName = "111",
+                    Password = "111111",
+                    SiteID = 1,
+                    Active = true,
+                    IsDelete = false
+                };
+                _userservice.Insert(cus, false);
+
+                
+                
+                throw new Exception();
+            }
+            catch
+            {
+                UnitOfWorkFactory.CurrentUnitOfWork.RollBack();
+            }
+            finally
+            {
+                if (UnitOfWorkFactory.HasContextOpen())
+                {
+                    UnitOfWorkFactory.CurrentUnitOfWork.Dispose();
+                }
+            }
+
             return Content("");
         }
+
 	}
 }

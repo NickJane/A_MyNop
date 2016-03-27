@@ -299,70 +299,70 @@ namespace Nop.Data
         }
 
 
-        //public DataTable ExcuteSQLQuery(string commandText, params object[] parameters)
-        //{
-        //    //var connection = context.Connection;
-        //    var connection = this.Database.Connection;
-        //    //Don't close the connection after command execution
+        public DataTable ExcuteSQLQuery(string commandText, params object[] parameters)
+        {
+            //var connection = context.Connection;
+            var connection = this.Database.Connection;
+            //Don't close the connection after command execution
 
-        //    //open the connection for use
-        //    if (connection.State == ConnectionState.Closed)
-        //        connection.Open();
-        //    //create a command object
-        //    using (var cmd = connection.CreateCommand())
-        //    {
-        //        //command to execute
-        //        cmd.CommandText = commandText;
-        //        cmd.CommandType = CommandType.Text;
-        //        if (UnitOfWorkFactory.CurrentUnitOfWork.Transacton != null)
-        //        {
-        //            cmd.Transaction = UnitOfWorkFactory.CurrentUnitOfWork.Transacton.UnderlyingTransaction;
-        //        }
-        //        // move parameters to command object
-        //        if (parameters != null)
-        //            foreach (var p in parameters)
-        //                cmd.Parameters.Add(p);
+            //open the connection for use
+            if (connection.State == ConnectionState.Closed)
+                connection.Open();
+            //create a command object
+            using (var cmd = connection.CreateCommand())
+            {
+                //command to execute
+                cmd.CommandText = commandText;
+                cmd.CommandType = CommandType.Text;
+                if (UnitOfWorkFactory.CurrentUnitOfWork.Transacton != null)
+                {
+                    cmd.Transaction = UnitOfWorkFactory.CurrentUnitOfWork.Transacton.UnderlyingTransaction;
+                }
+                // move parameters to command object
+                if (parameters != null)
+                    foreach (var p in parameters)
+                        cmd.Parameters.Add(p);
 
-        //        //database call
-        //        var reader = cmd.ExecuteReader();
-        //        DataTable table = new DataTable();
-        //        table.Load(reader);
-        //        reader.Close();
-        //        return table;
-        //    }
-        //}
+                //database call
+                var reader = cmd.ExecuteReader();
+                DataTable table = new DataTable();
+                table.Load(reader);
+                reader.Close();
+                return table;
+            }
+        }
 
-        //public IList<TEntity> ExcuteSQLQueryList<TEntity>(string commandText, params object[] parameters) where TEntity : BaseEntity, new()
-        //{
-        //    var connection = this.Database.Connection;
-        //    if (connection.State == ConnectionState.Closed)
-        //        connection.Open();
-        //    using (var cmd = connection.CreateCommand())
-        //    {
-        //        cmd.CommandText = commandText;
-        //        cmd.CommandType = CommandType.Text;
-        //        if (UnitOfWorkFactory.CurrentUnitOfWork.Transacton != null)
-        //        {
-        //            cmd.Transaction = UnitOfWorkFactory.CurrentUnitOfWork.Transacton.UnderlyingTransaction;
-        //        }
-        //        if (parameters != null)
-        //        {
-        //            foreach (var p in parameters)
-        //            {
-        //                cmd.Parameters.Add(p);
-        //            }
-        //        }
-        //        var context = ((IObjectContextAdapter)(this)).ObjectContext;
-        //        var reader = cmd.ExecuteReader();
+        public IList<TEntity> ExcuteSQLQueryList<TEntity>(string commandText, params object[] parameters) where TEntity : BaseEntity, new()
+        {
+            var connection = this.Database.Connection;
+            if (connection.State == ConnectionState.Closed)
+                connection.Open();
+            using (var cmd = connection.CreateCommand())
+            {
+                cmd.CommandText = commandText;
+                cmd.CommandType = CommandType.Text;
+                if (UnitOfWorkFactory.CurrentUnitOfWork.Transacton != null)
+                {
+                    cmd.Transaction = UnitOfWorkFactory.CurrentUnitOfWork.Transacton.UnderlyingTransaction;
+                }
+                if (parameters != null)
+                {
+                    foreach (var p in parameters)
+                    {
+                        cmd.Parameters.Add(p);
+                    }
+                }
+                var context = ((IObjectContextAdapter)(this)).ObjectContext;
+                var reader = cmd.ExecuteReader();
 
-        //        var result = context.Translate<TEntity>(reader).ToList();
-        //        for (int i = 0; i < result.Count; i++)
-        //            result[i] = AttachEntityToContext(result[i]);
-        //        //close up the reader, we're done saving results
-        //        reader.Close();
-        //        return result;
-        //    }
-        //}
+                var result = context.Translate<TEntity>(reader).ToList();
+                for (int i = 0; i < result.Count; i++)
+                    result[i] = AttachEntityToContext(result[i]);
+                //close up the reader, we're done saving results
+                reader.Close();
+                return result;
+            }
+        }
 
 
         public void ExecuteStoredProcedure(string commandText, params object[] parameters)
@@ -435,14 +435,5 @@ namespace Nop.Data
         }
 
 
-        public DataTable ExcuteSQLQuery(string commandText, params object[] parameters)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<TEntity> ExcuteSQLQueryList<TEntity>(string commandText, params object[] parameters) where TEntity : BaseEntity, new()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

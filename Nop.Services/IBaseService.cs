@@ -10,9 +10,9 @@ namespace Nop.Services
 {
     public interface IBaseService<TEntity, Tkey> where TEntity : BaseEntity
     {
-        void Insert(TEntity entity);
-        void Update(TEntity entity);
-        void Delete(TEntity entity);
+        void Insert(TEntity entity, bool isSubmit=true);
+        void Update(TEntity entity, bool isSubmit = true);
+        void Delete(TEntity entity, bool isSubmit = true);
         void Flush();
         TEntity FindBy(Tkey Id);
         TEntity FindBy(Expression<Func<TEntity, bool>> expression);

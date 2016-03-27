@@ -18,7 +18,7 @@ namespace MyNop
         {
             Nop.Core.Infrastructure.MyEngineContext.Initialize(false);
 
-
+            
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);

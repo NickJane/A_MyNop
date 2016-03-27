@@ -24,6 +24,7 @@ namespace Nop.Data.Mapping.Users
             this.Property(p => p.Active);
             this.Property(p => p.IsDelete);
             this.Property(p => p.Settings);
+            this.Ignore(x => x.AllSettings);
 
             this.HasMany<Auth_Role>(x => x.Auth_Roles)
                 .WithMany(x => x.UserAcconts)

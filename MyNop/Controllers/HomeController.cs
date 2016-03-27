@@ -91,5 +91,15 @@ namespace MyNop.Controllers
             return Content("");
         }
 
+        public ActionResult TestModelSetting() {
+            var temp = _userservice.Table.First();
+            temp.SetOneSetting("xiaomi", "jianjialin");
+            temp.SetOneSetting("mobile","13900000000");
+            temp.SaveSetting();
+            _userservice.Update(temp);
+
+            var temp2 = _userservice.Table.First();
+            return Content(temp2.AllSettings["xiaomi"]);
+        }
 	}
 }

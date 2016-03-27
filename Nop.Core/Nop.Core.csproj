@@ -80,6 +80,7 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Domain\Auth_Resource.cs" />
     <Compile Include="Domain\Auth_Role.cs" />
+    <Compile Include="Domain\ModelSetting.cs" />
     <Compile Include="Domain\UserAccount.cs" />
     <Compile Include="Domain\UserAddress.cs" />
     <Compile Include="Fakes\Extensions.cs" />

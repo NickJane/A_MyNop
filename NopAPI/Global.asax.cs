@@ -19,7 +19,6 @@ namespace NopAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-
             Nop.Core.Infrastructure.MyEngineContext.Initialize(false);
         }
     }

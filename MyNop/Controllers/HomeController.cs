@@ -12,12 +12,17 @@ using Nop.Data;
 
 namespace MyNop.Controllers
 {
+    public class VModel {
+       public int Id { get; set; }
+       public string pwd { get; set; }
+    }
     public class HomeController : Controller
     {
         private IUserService _userservice;
         public HomeController(IUserService userservice) {
             this._userservice = userservice;
         }
+
         //
         // GET: /Home/
         public ActionResult Index()
@@ -26,9 +31,10 @@ namespace MyNop.Controllers
 
             //var name = _roleRepository.FullTable.Where(x => x.IsDelete);
 
-            var temp= _userservice.Table.First();
+            var temp = _userservice.Fetch(x => x.IsDelete, x => x.Asc(user => user.ID))
+                .ToList();
 
-
+            var temp2 = _userservice.Table.OrderByDescending(x => x.ID).Skip(3).Take(5).Select(x => new { x.ID, x.Password }).ToList();
             /*
             NopObjectContext a = new NopObjectContext();
             var name = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().UserName;
@@ -41,7 +47,7 @@ namespace MyNop.Controllers
             var resources = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().Auth_Roles
                 .First().Auth_Resources;
             */
-            return Content(temp.UserName);
+            return Json(temp2,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult UseUnitOfWork() {

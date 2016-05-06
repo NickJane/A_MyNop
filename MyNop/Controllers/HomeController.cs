@@ -19,8 +19,10 @@ namespace MyNop.Controllers
     public class HomeController : Controller
     {
         private IUserService _userservice;
+        private IUserService _userservice2;
         public HomeController(IUserService userservice) {
             this._userservice = userservice;
+            _userservice2 = Nop.Core.Infrastructure.MyEngineContext.Current.Resolve<IUserService>();
         }
 
         //
@@ -47,7 +49,11 @@ namespace MyNop.Controllers
             var resources = a.Set<Nop.Core.Domain.UserAccount>().FirstOrDefault().Auth_Roles
                 .First().Auth_Resources;
             */
-            return Json(temp2,JsonRequestBehavior.AllowGet);
+            var temp3 = _userservice2.Table.OrderByDescending(x => x.ID).Skip(3).Take(5).Select(x => new { x.ID, x.Password }).ToList();
+            
+            
+            return Content(Newtonsoft.Json.JsonConvert.SerializeObject(temp2)+"-------------"+Newtonsoft.Json.JsonConvert.SerializeObject(temp3));
+            //return Json(temp2,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult UseUnitOfWork() {

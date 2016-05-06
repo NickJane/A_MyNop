@@ -13,16 +13,17 @@ namespace MyApi.Controllers
     public class UsersController : BaseController
     {
         private Nop.Services.Users.IUserService _userService;
-        public UsersController(Nop.Services.Users.IUserService userService)
+        public UsersController()
         {
-            _userService = userService;
+            //_userService = Nop.Core.Infrastructure.MyEngineContext.Current.Resolve<Nop.Services.Users.IUserService>();
         }
 
         [HttpGet]
-        public ApiResultModel GetUsers(dynamic model) { 
+        public ApiResultModel GetUsers(dynamic model) {
+            _userService = Nop.Core.Infrastructure.MyEngineContext.Current.Resolve<Nop.Services.Users.IUserService>();
             ApiResultModel result=new ApiResultModel();
-            if (model.EntityPager == null)
-                result.Data = _userService.Table.ToList();
+            //if (model.EntityPager == null)
+            //    result.Data = _userService.Table.ToList();
 
             return result;
         }

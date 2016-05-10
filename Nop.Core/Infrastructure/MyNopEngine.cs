@@ -11,6 +11,8 @@ using System.Reflection;
 using System.Web.Mvc;
 using Autofac.Core.Lifetime;
 using Nop.Core.Infrastructure.DependencyManagement;
+using System.Web.Http;
+using Autofac.Integration.WebApi;
 namespace Nop.Core.Infrastructure
 {
     public class MyNopEngine
@@ -40,7 +42,9 @@ namespace Nop.Core.Infrastructure
 
             
             container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            System.Web.Mvc.DependencyResolver.SetResolver(new AutofacDependencyResolver(container)); //Set the MVC DependencyResolver
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container); //设置mvc的依赖对象
 
         }
 

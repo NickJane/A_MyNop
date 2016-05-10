@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Builder;
+//mvc和api混合的应用程序, 需要同时引用两个dll
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using Nop.Core.Data;
 using Nop.Core.Fakes;
 using Nop.Core.Infrastructure;
@@ -20,6 +22,10 @@ namespace MyNop.Framework.Infrastructure
     {
         public virtual void Register(ContainerBuilder builder, ITypeFinder typeFinder)
         {
+            //SetupResolveRules
+            //SetupResolveRules(builder);
+            
+            
             //HTTP context and other related stuff
             builder.Register(c =>
                 //register FakeHttpContext when HttpContext is not available
@@ -54,10 +60,23 @@ namespace MyNop.Framework.Infrastructure
             //注册服务
             builder.RegisterType<Nop.Services.Users.UserService>() .As<Nop.Services.Users.IUserService>().InstancePerLifetimeScope();
 
-
+            builder.RegisterApiControllers(typeFinder.GetAssemblies().ToArray());
             //controllers
             builder.RegisterControllers(typeFinder.GetAssemblies().ToArray());
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces();
+            
+        }
+
+        /// <summary>
+        /// 给某个dll注入的规则例子
+        /// </summary>
+        /// <param name="builder"></param>
+        private static void SetupResolveRules(ContainerBuilder builder)
+        {
+
+            var assembly = Assembly.Load("s2s.BLL");   //根据程序集名称加载程序集
+            builder.RegisterAssemblyTypes(assembly).SingleInstance();//每次都返回同一个实例
+            builder.RegisterAssemblyTypes(assembly).Where(t => t.Name.EndsWith("Service")).AsImplementedInterfaces();
+
         }
 
 

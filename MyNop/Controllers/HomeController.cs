@@ -24,7 +24,10 @@ namespace MyNop.Controllers
             this._userservice = userservice;
             _userservice2 = Nop.Core.Infrastructure.MyEngineContext.Current.Resolve<IUserService>();
         }
-
+        public ActionResult Index2()
+        {
+            return Content("index2");
+        }
         //
         // GET: /Home/
         public ActionResult Index()

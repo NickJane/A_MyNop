@@ -20,6 +20,8 @@ namespace NopAPI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Nop.Core.Infrastructure.MyEngineContext.Initialize(false);
+
+
         }
     }
 }

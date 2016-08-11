@@ -53,6 +53,8 @@ namespace MyNop.Controllers
                 .First().Auth_Resources;
             */
             var temp3 = _userservice2.Table.OrderByDescending(x => x.ID).Skip(3).Take(5).Select(x => new { x.ID, x.Password }).ToList();
+
+            var userlistWithSql = _userservice.GetAllUsers();
             
             
             return Content(Newtonsoft.Json.JsonConvert.SerializeObject(temp2)+"-------------"+Newtonsoft.Json.JsonConvert.SerializeObject(temp3));

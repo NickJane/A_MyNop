@@ -46,6 +46,12 @@ namespace MyNop.Framework.Infrastructure
             builder.Register(c => c.Resolve<HttpContextBase>().Session)
                 .As<HttpSessionStateBase>()
                 .InstancePerLifetimeScope();
+            
+            //apis
+            builder.RegisterApiControllers(typeFinder.GetAssemblies().ToArray());
+            //controllers
+            builder.RegisterControllers(typeFinder.GetAssemblies().ToArray());
+
 
             //每次依赖都使用一个新的数据库对象
             builder.Register<IDbContext>(c => new NopObjectContext()).InstancePerDependency();
@@ -55,15 +61,8 @@ namespace MyNop.Framework.Infrastructure
             //注册泛型仓储
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
 
-            
-
             //注册服务
-            builder.RegisterType<Nop.Services.Users.UserService>() .As<Nop.Services.Users.IUserService>().InstancePerLifetimeScope();
-
-            builder.RegisterApiControllers(typeFinder.GetAssemblies().ToArray());
-            //controllers
-            builder.RegisterControllers(typeFinder.GetAssemblies().ToArray());
-            
+            builder.RegisterType<Nop.Services.Users.UserService>() .As<Nop.Services.Users.IUserService>().InstancePerLifetimeScope(); 
         }
 
         /// <summary>
@@ -72,11 +71,9 @@ namespace MyNop.Framework.Infrastructure
         /// <param name="builder"></param>
         private static void SetupResolveRules(ContainerBuilder builder)
         {
-
             var assembly = Assembly.Load("s2s.BLL");   //根据程序集名称加载程序集
             builder.RegisterAssemblyTypes(assembly).SingleInstance();//每次都返回同一个实例
             builder.RegisterAssemblyTypes(assembly).Where(t => t.Name.EndsWith("Service")).AsImplementedInterfaces();
-
         }
 
 

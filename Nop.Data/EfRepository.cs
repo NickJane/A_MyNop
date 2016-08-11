@@ -37,6 +37,7 @@ namespace Nop.Data
             //this._context = new NopObjectContext();
             this._context = UnitOfWorkFactory.CurrentUnitOfWork.Context;
         }
+        public Database Database { get { return this._context.Database; } }
         public IDbContext Context
         {
             get {

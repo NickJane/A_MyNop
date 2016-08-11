@@ -2,6 +2,7 @@
 using Nop.Core.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -35,6 +36,11 @@ namespace Nop.Services
         public void Flush()
         {
             _repository.Flush();
+        }
+        Database Database { 
+            get {
+                return _repository.Database;
+            } 
         }
         public virtual IQueryable<TEntity> Table
         {
